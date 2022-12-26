@@ -135,8 +135,8 @@
             opacity: 0;
         }
         @include breakpoints("mobile") {
-            top: 79%;
-            justify-content: center;
+            top: 77%;
+            justify-content: end;
             column-gap: 1.25rem;
             .btn {
                 @include circle(30px);

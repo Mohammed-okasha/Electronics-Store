@@ -208,13 +208,13 @@ $footer-color: #acacac;
 //* Scroll To Top Button
 .up {
     position: fixed;
-    bottom: 1.25rem; right: 1.25rem;
+    bottom: 3rem; left: 1.25rem;
     z-index: 999;
     @include customBtn(35px, 35px);
     background-color: $secondary-color;
     border-radius: 3px;
     @include trans(.3s);
-    transform: translateX(55px);
+    transform: translateX(-55px);
     svg {
         display: table-cell;
         margin: 0 auto;

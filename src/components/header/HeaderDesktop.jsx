@@ -47,7 +47,7 @@ const HeaderDesktop = () => {
     return (
         <div className={`header_desktop ${isScrolling ? "header_fixed" : ""}`}>
             <Ovetlay isOpen={isOpen} closeMenu={closeMenu} />
-            <HeaderTop openMenu={openMenu} />
+            <HeaderTop openMenu={openMenu} isOpen={isOpen} />
             <HeaderBottom isOpen={isOpen} closeMenu={closeMenu} />
         </div>
     );

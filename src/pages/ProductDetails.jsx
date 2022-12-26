@@ -12,8 +12,6 @@ import { useNavigate } from "react-router-dom";
 import Loader from "../components/loader/Loader";
 import LoadingGif from "../assets/images/loading-1.gif";
 import { ProductImages, RelatedProducts } from "../components";
-//? mainImageContext
-export const mainImageContext = React.createContext();
 //!=========================================================
 const ProductDetails = () => {
     const [product, setProduct] = useState({});
@@ -42,6 +40,11 @@ const ProductDetails = () => {
         // navigate To Cart Page
         navigate("/cart");
     };
+
+    // Handle Main Image
+    const handleMainImage = (img) => {
+        setMainImage(img);
+    }
 
     // Destruction Product Data
     const {
@@ -146,16 +149,15 @@ const ProductDetails = () => {
                                         }
                                     </div>
 
-                                    <mainImageContext.Provider Providervalue={setMainImage}>
-                                        {productImages.length > 0 ?
-                                            <ProductImages
-                                                productImages={productImages}
-                                                title={title}
-                                            />
-                                            :
-                                            null
-                                        }
-                                    </mainImageContext.Provider>
+                                    {productImages.length > 0 ?
+                                        <ProductImages
+                                            productImages={productImages}
+                                            title={title}
+                                            handleMainImage={handleMainImage}
+                                        />
+                                        :
+                                        null
+                                    }
                                 </div>
 
                                 <div className="col">

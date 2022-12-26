@@ -45,6 +45,7 @@ $about-padding: calc($base-padding * 3);
                 display: flex;
                 flex-flow: column;
                 row-gap: 2rem;
+                padding-top: 1.6rem;
                 .item {
                     display: flex;
                     align-items: flex-start;

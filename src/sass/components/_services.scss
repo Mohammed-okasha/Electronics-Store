@@ -24,8 +24,10 @@
             border-radius: math.div($base-border-radius, 4);
             color: $white;
             @include trans(.3s);
-            &:hover {
-                transform: translateY(-10px);
+            @media (min-width: 768px) {
+                &:hover {
+                    transform: translateY(-10px);
+                }
             }
             .icon {
                 padding: .75rem;

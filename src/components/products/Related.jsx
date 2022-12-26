@@ -62,7 +62,7 @@ const RelatedProducts = () => {
 
     return (
         <section className="products related">
-            <div className="container">
+            <div className="container" style={{padding: "0"}}>
                 <div className="sec-title">
                     <h2>related products</h2>
                 </div>

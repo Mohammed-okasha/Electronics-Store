@@ -1,14 +1,11 @@
-import { useState, useContext } from "react";
-import { mainImageContext } from "../../pages/ProductDetails";
+import { useState } from "react";
 //!====================================================================
-const ProductImages = ({ productImages, title }) => {
+const ProductImages = ({ productImages, title, handleMainImage }) => {
     const [index, setIndex] = useState(0);
-    const setMainImage = useContext(mainImageContext);
 
-    const setActiveImg = (img, index) => {
+    const setActiveImg = (index) => {
         // Update index Value
         setIndex(index);
-        setMainImage(img);
     };
 
     return (
@@ -17,7 +14,10 @@ const ProductImages = ({ productImages, title }) => {
                 return (
                     <div key={imgIndex}
                         className={`image ${imgIndex === index ? "active" : ""}`}
-                        onClick={() => setActiveImg(img, imgIndex)}
+                        onClick={() => {
+                            handleMainImage(img);
+                            setActiveImg(imgIndex);
+                        }}
                     >
                         <img src={img} alt={title} />
                     </div>

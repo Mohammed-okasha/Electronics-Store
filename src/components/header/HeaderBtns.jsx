@@ -10,7 +10,7 @@ import { selectTotalCartItems } from "../../RTk/slices/cartSlice";
 import ShowOnSignIn from "../auth/ShowOnSignIn";
 import ShowOnSignOut from "../auth/ShowOnSignOut";
 //!======================================================
-const HeaderBtns = ({openMenu}) => {
+const HeaderBtns = ({openMenu, isOpen}) => {
     const userName = useSelector(selectUserName);
     const totalCartItems = useSelector(selectTotalCartItems);
 
@@ -37,8 +37,8 @@ const HeaderBtns = ({openMenu}) => {
             </div>
 
             <button
+                className={`toggle ${isOpen ? "open" : ""}`}
                 onClick={openMenu}
-                className={`toggle `}
             >
                 <span className="bars-icon"></span>
             </button>
