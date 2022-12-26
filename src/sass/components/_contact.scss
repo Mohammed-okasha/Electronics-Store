@@ -1,0 +1,125 @@
+@use "sass:math";
+@use "../abstracts/colors" as *;
+@use "../mixins/buttons" as *;
+@use "../mixins/breakpoints" as *;
+@use "../mixins/radius" as *;
+@use "../layout/flex" as *;
+@import "../abstracts/variables";
+@import "../abstracts/classes";
+//!====================================================================
+// Start nav_contact section
+.nav_contact {
+    padding-top: $base-padding * 2;
+}
+//!====================================================================
+// Start location map section
+.location_map {
+    padding: ($base-padding * 2) 0 ($base-padding * 4);
+    background-color: $white;
+    .google_map {
+        height: 60vh;
+        border-radius: math.div($base-border-radius, 2);
+        box-shadow:  0 0 2px 2px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+        @media (max-width: 767px) {
+            height: 30vh;;
+        }
+        iframe {
+            height: 100%; width: 100%;
+            border: none;
+            border-radius: inherit;
+        }
+    }
+}
+//!====================================================================
+// Start Contact Info section
+.contact_info {
+    padding-bottom: $base-padding * 4;
+    .row {
+        display: flex;
+        row-gap: 2rem;
+        > * {flex: 1;}
+        .our_data {
+            > .text-muted {
+                margin: 1.25rem 0;
+            }
+
+            .contact_items {
+                .contact_item {
+                    display: flex;
+                    gap: .75rem;
+                    &:not(:last-of-type) {
+                        margin-bottom: 1rem;
+                    }
+                    svg {
+                        color: $primary-color;
+                        @include trans(.3s);
+                        &:hover {color: $secondary-color;}
+                    }
+                    .text {
+                        font-size: 14px;
+                        color: $light;
+                        line-height: 1.5;
+                    }
+                }
+            }
+        }
+
+        .contact_form {
+            form {
+                .form_input {
+                    &:not(:last-of-type) {margin-bottom: 1rem;}
+                    > *:not(p) {
+                        width: 100%;
+                        border: 1px solid $light-color;
+                        padding: 1rem;
+                        border-radius: math.div($base-border-radius, 2);
+                        color: $primary-color;
+                        caret-color: $secondary-color;
+                        @include trans(.3s);
+                        &::placeholder {
+                            text-transform: capitalize;
+                            font-size: 12px;
+                        }
+                        &:focus {
+                            outline: none;
+                            border: 1px solid $secondary-color;
+                        }
+                        &.error {
+                            border: 1px solid $red;
+                        }
+                    }
+
+                    textarea {
+                        min-height: 200px;
+                        max-height: 200px;
+                        resize: none;
+                    }
+                }
+
+                .submit_btn {
+                    margin-top: 1.6rem;
+                    @include centering;
+                    @include customBtn(120px, 40px);
+                    @include trans(.3s);
+                    column-gap: 6px;
+                    background-color: $secondary-color;
+                    color: $white;
+                    border-radius: $main-radius;
+                    &:hover {
+                        background-color: $primary-color;
+                    }
+                }
+            }
+        }
+
+        @media (min-width: 768px) {
+            .our_data {padding-right: 2rem;}
+            .contact_form {padding-left: 2rem;}
+        }
+        @media (max-width: 767px) {
+            flex-direction: column;
+        }
+    }
+}
+//!====================================================================

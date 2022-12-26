@@ -1,0 +1,11 @@
+@mixin circle($dimensions) {
+    width: $dimensions;
+    height: $dimensions;
+    line-height: $dimensions;
+    text-align: center;
+    border-radius: 50%;
+};
+
+@mixin trans($duration) {
+    transition: $duration all;
+};

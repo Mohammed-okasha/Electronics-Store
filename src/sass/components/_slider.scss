@@ -1,0 +1,151 @@
+@import "../abstracts/colors";
+@import "../mixins/buttons";
+@import "../mixins/breakpoints";
+@import "../mixins/radius";
+//!====================================================================
+#sliders {
+    position: relative;
+    min-height: 80vh; width: 100%;
+    overflow: clip;
+    inset: 0;
+    @include breakpoints("mobile") {
+        min-height: 60vh;
+    }
+    .slider {
+        position: absolute;
+        height: 100%; width: 100%;
+        top: 0;
+        background-color: $hero-bg;
+        display: grid; place-items: center;
+        transition: .5s ease-out;
+        visibility: hidden;
+        &.active {
+            left: 0;
+            visibility: visible;
+        }
+        &.next {left: 100%;}
+        &.prev {left: -100%;}
+        .row {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            position: relative;
+            z-index: 2;
+            > * {flex: 1;}
+            .slider-content {
+                div {
+                    text-transform: uppercase;
+                    max-width: 600px;
+                    width: 100%;
+                    .text {
+                        color: $secondary-color;
+                        font: {
+                            size: 14px;
+                            weight: 600;
+                        }
+                    }
+                    .title {
+                        max-width: 500px;
+                        font-size: 1.6rem;
+                        word-wrap: break-word;
+                        color: $primary-color;
+                        margin: 10px 0;
+                    }
+                    .desc {
+                        font: {
+                            size: 1rem;
+                            weight: 600;
+                        }
+                    }
+                }
+                .shop {
+                    display: inline-block;
+                    width: 170px; height: 45px;
+                    text-align: center; line-height: 45px;
+                    margin-top: 1.9rem;
+                    background-color: $secondary-color;
+                    color: $white;
+                    text-transform: capitalize;
+                    letter-spacing: .5px;
+                    border-radius: 3px;
+                    @include trans(.3s);
+                    font: {
+                        size: 1rem;
+                        weight: 500;
+                    }
+                    &:hover {background-color: $primary-color;}
+                    @include breakpoints("mobile") {
+                        width: 120px; height: 35px;
+                        line-height: 35px;
+                        font-size: 14px;
+                        margin-top: 1.25rem;
+                    };
+                }
+            }
+
+            .slider-img {
+                img {
+                    display: table;
+                    max-width: 500px;
+                    width: 100%;
+                    margin: 0 auto;
+                    object-fit: contain;
+                    user-select: none;
+                }
+            }
+
+            @include breakpoints("mobile") {
+                .slider-img {display: none;}
+                .slider-content {
+                    div {
+                        .title {font-size: 1.3rem;}
+                    }
+                }
+            }
+        }
+    }
+
+    .control-btns {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        padding: 0 15px;
+        z-index: 10;
+        @include trans(.6s);
+        .btn {
+            all: unset;
+            @include circle(50px);
+            @include trans(.3s);
+            background-color: $primary-color;
+            opacity: .8;
+            cursor: pointer;
+            svg {
+                color: $white;
+                display: table-cell;
+                margin: 0 auto;
+            }
+            &:hover {opacity: 1;}
+        }
+
+        @include breakpoints("large") {
+            visibility: hidden;
+            opacity: 0;
+        }
+        @include breakpoints("mobile") {
+            top: 79%;
+            justify-content: center;
+            column-gap: 1.25rem;
+            .btn {
+                @include circle(30px);
+                svg {font-size: 14px;}
+            }
+        }
+    }
+
+    &:hover {
+        .control-btns {visibility: visible; opacity: 1;}
+    }
+}

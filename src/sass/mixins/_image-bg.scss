@@ -1,0 +1,4 @@
+@mixin image_bg($image) {
+    $url: url("../../assets/images/#{$image}");
+    background: $url no-repeat center center;
+};

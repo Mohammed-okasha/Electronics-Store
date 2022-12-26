@@ -1,0 +1,246 @@
+// @use "./colors" as *;
+@use "../mixins/breakpoints" as *;
+@use  "../mixins/custom" as *;
+@import  "../mixins/buttons";
+@import "../mixins/radius";
+@import "../abstracts/variables";
+@import "../layout/flex";
+//!=========================================================
+.text-muted {
+    color: #777;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.sec-title {
+    margin: 0 15px -20px;
+    border-bottom: 1px solid $light-color;
+    h2 {
+        color: $primary-color;
+        padding-bottom: 15px;
+        font-size: 1.25rem;
+        width: fit-content;
+        position: relative;
+        &::after {
+            content: "";
+            position: absolute;
+            left: 0; bottom: -1px;
+            width: 100%; height: 2px;
+            background-color: $secondary-color;
+        }
+        @include breakpoints("mobile") {
+            font-size: 1.1rem;
+        }
+    }
+}
+
+.img-fluid {
+    max-width: 100%;
+    object-fit: contain;
+    user-select: none;
+    image-rendering: optimizeQuality;
+}
+
+.card-img {
+    display: table;
+    max-width: 180px; height: 180px;
+    margin: 0 auto;
+    object-fit: contain;
+    border-radius: 5px 5px 0 0;
+    user-select: none;
+    @include trans(.8s);
+}
+
+.form_btn {
+    @include customBtn(100px, 35px);
+    background-color: $secondary-color;
+    color: $white;
+    border-radius: $main-radius;
+    @include trans(.3s);
+    &:hover {
+        background-color: $primary-color;
+    }
+}
+
+.custom-title {
+    margin-bottom: 1.8rem;
+    padding-bottom: 10px;
+    border-bottom: 1px solid $light-color;
+    font-weight: 500;
+    color: $primary-color;
+    @include breakpoints("mobile") {
+        font-size: 1.25rem;
+    }
+    span {
+        display: inline-block;
+        position: relative;
+        &::after {
+            content: "";
+            position: absolute;
+            left: 0; bottom: -11px;
+            width: 100%; height: 2px;
+            background-color: $secondary-color;
+        }
+    }
+}
+
+.error_msg {
+    color: $red;
+    padding-top: .5rem;
+    font: {
+        size: .75rem;
+        weight: 400;
+    }
+}
+
+.product-card {
+    border-radius: 5px;
+    position: relative;
+    width: 100%;
+    z-index: 1;
+    @include trans(.3s);
+    &::after {
+        content: "";
+        position: absolute;
+        left: 0; bottom: 0;
+        width: 100%; height: 0;
+        background-color: #fefefe;
+        border-radius: 5px;
+        z-index: -1;
+        @include trans(.4s);
+    }
+    .image {padding: 1rem 0;}
+    .card-content {
+        padding: 1.25rem 1.25rem 0;
+        .title {
+            color: $secondary-color;
+            margin-bottom: 10px;
+            font-size: 15px;
+            line-height: 1.5;
+        }
+        .card-footer {
+            margin-top: 15px;
+            > * {@include trans(.3s);}
+            .top {
+                @include space-between;
+                border-bottom: 1px solid transparent;
+                padding-bottom: 10px;
+                margin-bottom: 15px;
+                .price {
+                    display: flex;
+                    flex-direction: column;
+                    row-gap: .25rem;
+                    .price-text {
+                        color: $primary-color;
+                        font-weight: 600;
+                        &.old {
+                            color: $red;
+                            text-decoration: line-through;
+                        }
+                    }
+                }
+                .card_btn {
+                    @include circle(35px);
+                    background: none;
+                    background-color: $light-color;
+                    border: none; outline: none;
+                    cursor: pointer;
+                    @include trans(.3s);
+                    position: relative;
+                    .tooltip {
+                        position: absolute;
+                        top: -38px; left: 50%;
+                        transform: translateX(-51%);
+                        width: 80px; height: 30px;
+                        line-height: 30px;
+                        padding: 0 5px;
+                        background-color: $primary-color;
+                        color: $white;
+                        font-size: 11px;
+                        border-radius: $main-radius;
+                        visibility: hidden;
+                        opacity: 0;
+                        @include trans(.3s);
+                        &::after {
+                            content: "";
+                            position: absolute;
+                            bottom: -16px; left: 50%;
+                            transform: translateX(-50%);
+                            border: 8px solid $secondary-color;
+                            border-color: $primary-color transparent transparent transparent;
+                        }
+                    }
+                    svg {
+                        display: table;
+                        margin: 0 auto;
+                    }
+
+                    &:hover {
+                        .tooltip {visibility: visible; opacity: 1;}
+                    }
+                }
+            }
+            .preview {
+                padding-bottom: 15px;
+                @include centering;
+                visibility: hidden;
+                opacity: 0;
+                transform: translateY(20px);
+                .preview-link {
+                    @include centering;
+                    gap: .5rem;
+                    color: $light;
+                    @include trans(.3s);
+                    font: {
+                        size: 15px;
+                        weight: 500;
+                    };
+                    &:any-link:hover {
+                        color: $secondary-color;
+                    }
+                }
+            }
+        }
+    }
+    &:hover {
+        &::before {width: 0; height: 0; opacity: 0;}
+        &::after {
+            height: 100%;
+            box-shadow: 1px 0px 4px 1px rgba(152, 152, 152, 0.4),
+            -1px 0px 4px 1px rgba(152, 152, 152, 0.4);
+        }
+        .card-img {transform: scale(1.07);}
+        .card-footer {
+            .top {
+                border-bottom: 1px solid $light-color;
+                .card_btn {background-color: $secondary-color;}
+            }
+            .preview {
+                visibility: visible;
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    }
+}
+
+.about_title {
+    text-align: center;
+    margin-bottom: 2rem;
+    h1 {
+        color: $primary-color;
+        margin-bottom: 10px;
+        font-size: 2rem;
+        @include breakpoints("mobile") {
+            font-size: 1.5rem;
+        }
+    }
+}
+
+.our_logo {
+    font-size: 1.6rem;
+    span {
+        font-weight: bolder;
+        color: $secondary-color;
+    }
+}

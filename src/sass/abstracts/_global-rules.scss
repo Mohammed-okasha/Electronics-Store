@@ -1,0 +1,50 @@
+@use "../abstracts/colors" as *;
+@import "../mixins/custom";
+
+// Roboto Font
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+*::selection {
+    background-color: $secondary-color;
+    color: $white;
+}
+
+@include scroll_bar("y");
+
+body {
+    font-family: 'Roboto', sans-serif;
+    text-transform: capitalize;
+    direction: ltr;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: unset;
+}
+
+.container {
+    max-width: 1300px;
+    width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media (max-width: 480px) {
+    .Toastify .Toastify__toast-container {
+        width: 100%;
+    }
+}
+
+

@@ -1,0 +1,250 @@
+@use "sass:math";
+// Sass files
+@use "../abstracts/colors" as *;
+@use "../mixins/buttons" as *;
+@use "../mixins/breakpoints" as *;
+@use "../mixins/radius" as *;
+@use "../layout/grid" as *;
+@use "../layout/flex" as *;
+@use "../abstracts/variables" as *;
+
+$radius: math.div($base-border-radius, 4);
+//!=================================================================
+.shop_category_area {
+    margin-top: 1rem;
+    .shop_top_bar {
+        border: 1px solid $light-color;
+        border-radius: $main-radius;
+        margin-bottom: calc(1rem * 2);
+        @include space-between;
+        gap: 1.25rem;
+        padding: $base-padding calc($base-padding + 9px);
+        .display_btns {
+            .btn {
+                &:first-child {margin-right: .5rem;}
+                @include customBtn(25px, 25px);
+                background-color: unset;
+                color: #bec4c9;
+                @include trans(.3s);
+                &.active, &:hover {
+                    color: $secondary-color;
+                }
+                svg {
+                    font-size: 1.25rem;
+                    vertical-align: middle;
+                }
+            }
+        }
+
+        .search_products {
+            border: 1px solid $light-color;
+            border-radius: math.div($base-border-radius, 4);
+            input[type="search"] {
+                width: 400px;
+                padding: 10px 15px;
+                border: none;
+                border-radius: $radius 0 0 $radius;
+                color: $primary-color;
+                caret-color: $secondary-color;
+                @include trans(.3s);
+                &:focus {
+                    outline: none;
+                }
+            }
+
+            .icon {
+                display: inline-block;
+                padding: 10px 15px;
+                border-radius: 0 $radius $radius 0;
+                position: relative;
+                &::before {
+                    content: "";
+                    position: absolute;
+                    left: 0; bottom: 0;
+                    width: 100%; height: 0;
+                    background-color: $secondary-color;
+                    border-radius: $radius;
+                    @include trans(.3s);
+                    z-index: -1;
+                }
+                svg {
+                    vertical-align: middle;
+                    color: $primary-color;
+                    @include trans(.3s);
+                }
+            }
+            &:hover {
+                .icon {
+                    &::before {height: 100%;}
+                    svg {color: $white}
+                }
+            }
+        }
+
+        @media (max-width: 650px) {
+            flex-flow: column;
+            justify-content: normal;
+            padding: 0;
+            border: none;
+            & :is(.display_btns, .search_products) {
+                width: 100%;
+                text-align: center;
+            }
+
+            .search_products {
+                display: flex;
+                input[type="search"] {
+                    width: 85%;
+                    padding: 10px;
+                }
+
+                .icon {
+                    width: 15%;
+                    padding: 10px 0;
+                }
+            }
+        }
+    }
+
+    .shop_products_content {
+        display: flex;
+        gap: 2rem;
+        padding: 0 0 calc($base-padding * 2);
+
+        // Sidebar Area
+        .sidebar_area {
+            width: 25%;
+            aside:not(:last-of-type) {
+                margin-bottom: 2.5rem;
+            }
+            .sort_by_category {
+                .toggle_categories {
+                    .toggle_btn {
+                        @include space-between;
+                        width: 100%;
+                        padding: 10px 15px;
+                        background-color: #F7F7F7;
+                        color: $primary-color;
+                        border: 1px solid $light-color;
+                        outline: none;
+                        font-size: 1rem;
+                        text-transform: capitalize;
+                        cursor: pointer;
+                        border-radius: 5px 5px 0 0;
+                        .text {
+                            font: {
+                                size: 14px;
+                                weight: 600;
+                            };
+                        }
+
+                        .icon {
+                            display: inline-flex;
+                            @include trans(.3s);
+                            &.rotate {
+                                transform: rotate(180deg);
+                            }
+                        }
+                    }
+                }
+
+                .dropdwon_categories_list {
+                    border: 1px solid $light-color;
+                    border-color: transparent $light-color $light-color $light-color;
+                    border-radius: 0 0 5px 5px;
+
+                    height: 100%;
+                    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+                    background-color: $white;
+                    @include trans(.3s);
+                    .dropdwon_item {
+                        color: $primary-color;
+                        padding: .75rem 15px;
+                        font-size: 14px;
+                        font-weight: 400;
+                        @include trans(.3s);
+                        cursor: pointer;
+                        &:not(:last-child) {
+                            border-bottom: 1px solid $light-color;
+                        }
+                        &:last-child {
+                            border-radius: 0 0 5px 5px;
+                        }
+                        &:hover, &.active {
+                            background-color: $secondary-color;
+                            color: $white;
+                        }
+                    }
+
+                    &.close_dropdwon {
+                        height: 0;
+                        clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+                    }
+                }
+            }
+        }
+
+        // Products Area
+        .products_area {
+        flex: 1;
+            .row {
+                @include grid_layout(250px);
+                position: relative;
+                min-height: 300px;
+                .product-card {
+                    position: relative;
+                    .image {padding: 1rem 10px;}
+
+                    &::before {
+                        content: "";
+                        position: absolute;
+                        right: 0; top: 50%;
+                        transform: translateY(-50%);
+                        height: 70%; width: 1px;
+                        background-color: $light-color;
+                    }
+                }
+                &.list_layout {
+                    display: grid;
+                    grid-template-columns: repeat(1, 1fr);
+                    .product-card {
+                        display: flex;
+                        align-items: center;
+                        &::before {
+                            left: 50%;
+                            top: 100%;
+                            transform: translate(-50%, 0);
+                            height: 1px; width: 90%;
+                        }
+                    }
+                }
+                @media (max-width: 500px) {
+                    .product-card  {
+                        flex-flow: column;
+                        &::before {
+                            left: 50%;
+                            top: 100%;
+                            transform: translate(-50%, 0);
+                            height: 1px; width: 90%;
+                        }
+                    }
+                }
+            }
+        }
+
+        @media (max-width: 900px) {
+            flex-flow: column;
+            gap: 1.25rem;
+            .sidebar_area {width: 100%;}
+        }
+    }
+}
+//!===========================================================
+.notFound_msg {
+    @include centering;
+    flex-flow: column;
+    .notFound_title {
+        padding-top: 10px;
+        color: $primary-color;
+    }
+}

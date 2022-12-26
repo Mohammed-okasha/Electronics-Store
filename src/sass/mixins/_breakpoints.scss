@@ -1,0 +1,12 @@
+@mixin breakpoints($screen) {
+    @if ($screen == "large") {
+        @media (min-width: 1200px) {
+            @content;
+        }
+
+    } @else if ($screen == "mobile") {
+        @media (max-width: 767px) {
+            @content;
+        }
+    }
+}

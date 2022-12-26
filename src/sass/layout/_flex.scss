@@ -1,0 +1,19 @@
+// @include flex-layout($type) {
+//     justify-content: space-between;
+//     @if ($type == "space-between") {
+//         display: flex;
+
+//     }
+// }
+
+@mixin space_between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+};
+
+@mixin centering {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+};

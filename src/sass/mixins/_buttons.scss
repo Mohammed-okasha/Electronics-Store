@@ -1,0 +1,7 @@
+@mixin customBtn($width, $height) {
+    height: $height;
+    width: $width;
+    border: none; outline: none;
+    text-transform: capitalize;
+    cursor: pointer;
+}

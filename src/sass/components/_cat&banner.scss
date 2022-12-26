@@ -1,0 +1,176 @@
+@use "../abstracts/colors" as *;
+@use "../mixins/buttons" as *;
+@use "../mixins/breakpoints" as *;
+@use "../mixins/radius" as *;
+@use "../layout/grid" as *;
+@use "../layout/flex" as *;
+@use "../mixins/image-bg" as *;
+@import "../mixins/custom";
+//!====================================================================
+.categories {
+    padding-bottom: 60px;
+    .row {
+        @include grid_layout(200px);
+        gap: 1.25rem;
+        .cat {
+            text-align: center;
+            padding: 1.25rem 15px;
+            border-radius: 5px;
+            .cat-text {
+                margin-top: 6px;
+                a {
+                    color: $primary-color;
+                    font: {
+                        size: 14px;
+                        weight: 500;
+                    };
+                }
+            }
+        }
+    }
+}
+//!====================================================================
+.banners {
+    padding-bottom: 60px;
+    .row {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1.25rem;
+        .banner {
+            width: calc(50% - 10px);
+            a {
+                position: relative;
+                width: 100%;
+                &::before {
+                    content: "";
+                    position: absolute;
+                    left: 0; bottom: 0;
+                    width: 100%; height: 0;
+                    background-color: $banner-bg;
+                    @include trans(.3s);
+                }
+                &:hover:any-link::before {
+                    height: 100%;
+                }
+                img {display: table; width: 100%;}
+            }
+        }
+        @media (max-width: 767px) {
+            .banner {width: 100%;}
+        }
+    }
+}
+//!====================================================================
+.grid_home_banners {
+    padding: 10px 0;
+    .row {
+        display: grid;
+        grid-template-columns: 45% 1fr;
+        gap: 1.5rem;
+        .featured_category {
+            min-height: 270px;
+            @include image_bg("banner-3.jpg");
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: grid; place-items: center;
+            .cat-title {
+                width: 100%;
+                text-align: end;
+                padding: 2rem;
+                h4 {
+                    color: $primary-color;
+                    font-size: 1rem;
+                }
+                @include breakpoints("mobile") {
+                    background-color: #146cdac4;
+                    text-align: center;
+                    h4 {color: $white;}
+                }
+            }
+        }
+
+        .banners_categories {
+            @include grid_layout(200px);
+            @include scroll_bar("x");
+            gap: 1.5rem;
+            .banner_cat {
+                a {
+                    display: inline-block;
+                    width: 100%; height: 100%;
+                    padding: 10px;
+                    position: relative;
+                    z-index: 1;
+                    .banner_img {
+                        height: 100%;
+                        max-width: 80px;
+                        object-fit: contain;
+                        user-select: none;
+                    }
+
+                    .banner_title {
+                        position: absolute;
+                        top: 50%; transform: translateY(-50%);
+                        width: 100%; left: 0;
+                        padding: 0 30px;
+                        h5 {
+                            text-align: end;
+                            color: $primary-color;
+                            font-weight: 600;
+                            @include breakpoints("mobile") {
+                                text-align: end;
+                                font-size: 1.1rem;
+                            }
+                        }
+                    }
+
+                    &::before {
+                        content: "";
+                        position: absolute;
+                        left: 0; bottom: 0;
+                        width: 100%; height: 0;
+                        background-color: rgb(231 231 231 / 50%);
+                        z-index: -1;
+                        @include trans(.3s);
+                    }
+                    &:any-link:hover::before {height: 100%;}
+                }
+            }
+            @include breakpoints("mobile") {
+                display: flex;
+                flex-flow: nowrap;
+                gap: 0;
+                overflow: auto;
+                .banner_cat {
+                    flex: 0 0 100%;
+                    margin-bottom: 10px;
+                }
+            }
+        }
+        @media (max-width: 991px) {
+            grid-template-columns: 1fr;
+        }
+    }
+}
+//!====================================================================
+// Start Brands Section
+.brands {
+    padding: 60px 0;
+    .brand-item {
+        padding: 10px 0;
+        .logo {
+            display: table;
+            width: 150px;
+            margin: 0 auto;
+            image-rendering: optimizeQuality;
+            user-select: none;
+            opacity: .6;
+            filter: grayscale(40%);
+            @include trans(.3s);
+        }
+        &:hover {
+            .logo {opacity: 1; filter: grayscale(0);}
+        }
+    }
+}

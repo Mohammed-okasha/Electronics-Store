@@ -1,0 +1,356 @@
+@use "sass:math";
+
+@use "../abstracts/colors" as *;
+@use "../abstracts/variables" as *;
+@use "../mixins/buttons" as *;
+@use "../mixins/breakpoints" as *;
+@use "../mixins/radius" as *;
+@import "../mixins/custom";
+@import "../layout/flex";
+//!====================================================================
+#header {
+    .header_desktop {
+        position: relative;
+        top: 0; left: 0;
+        width: 100%;
+        background-color: $white;
+        box-shadow: 1px 0 4px 0 rgba(black, 0.4);
+        z-index: 500;
+
+        .header_top_wrapper {
+            background-color: $white;
+            min-height: 80px;
+            .header_top_content {
+                min-height: 80px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                .search_product_area {
+                    border: 1px solid $light-color;
+                    border-radius: math.div($base-border-radius, 4);
+                    position: relative;
+                    .product_search_form {
+                        display: flex;
+                        align-items: center;
+                        > :is(.product_category_holder, input[type="search"]) {
+                            height: 40px;
+                        }
+                        .product_category_holder {
+                            display: flex;
+                            align-items: center;
+                            position: absolute;
+                            left: 0; top: 0;
+                            z-index: 1;
+                            
+                            .product_category {
+                                width: 150px; height: 1.25rem;
+                                appearance: none;
+                                outline: none; border: none;
+                                border-right: 1px solid $light-color;
+                                padding: 0 calc($base-padding * 2.5) 0 .75rem;
+                                text-transform: capitalize;
+                                font-weight: 600;
+                                color: $primary-color;
+                                cursor: pointer;
+                                option {color: $light;}
+                            }
+
+                            &::after {
+                                content: "\f105";
+                                position: absolute;
+                                right: 1.25rem;
+                                color: $primary-color;
+                                @include trans(.3s);
+                                font: {
+                                    family: "font awesome 5 free";
+                                    weight: 900;
+                                    size: 14px;
+                                };
+                            }
+                            &:hover {
+                                &::after {
+                                    transform: rotate(90deg);
+                                    color: $secondary-color;
+                                }
+                            }
+                        }
+
+                        input[type="search"] {
+                            position: relative;
+                            width: 350px;
+                            outline: none; border: none;
+                            caret-color: $secondary-color;
+                            margin: 0 40px 0 166px;
+                        }
+
+                        .product_search_submit {
+                            position: absolute;
+                            right: .25rem;
+                            @include customBtn(35px, 35px);
+                            background-color: unset;
+                            color: $primary-color;
+                            z-index: 2;
+                            @include trans(.3s);
+                            svg {vertical-align: middle;}
+                            &::before {
+                                content: "";
+                                position: absolute;
+                                left: 0; right: 0; bottom: 0;
+                                width: 100%; height: 0%;
+                                background-color: $secondary-color;
+                                border-radius: math.div($base-border-radius, 5);
+                                z-index: -1;
+                                @include trans(.3s);
+                            }
+                            &:hover {
+                                color: $white;
+                                &::before {height: 100%}
+                            }
+                        }
+                    }
+                }
+
+                .header-btns {
+                    .desktop_btns {
+                        @include centering;
+                        .btn {
+                            @include centering;
+                            @include circle(30px);
+                            background-color: $primary-color;
+                            span {
+                                color: $white;
+                                font:  {
+                                    size: 12px;
+                                    weight: 500;
+                                };
+                            }
+                            &:not(:first-child) {
+                                margin-left: 10px;
+                            }
+                            &.cart {
+                                position: relative;
+                                .total_cart_items {
+                                    @include totalCartItems("right");
+                                }
+                            }
+                        }
+
+                        @include breakpoints("mobile") {
+                            display: none;
+                        }
+                    }
+                    .toggle {
+                        @include customBtn(30px, 30px);
+                        display: none;
+                        background: none;
+
+                        .bars-icon {
+                            display: block;
+                            width: 22px; height: 2px;
+                            background-color: $primary-color;
+                            transition: .3s;
+                            position: relative;
+                            &::before, &::after {
+                                content: "";
+                                position: absolute;
+                                left: 0;
+                                width: 100%; height: 100%;
+                                background-color: $primary-color;
+                                transition: .3s;
+                            }
+                            &::before {top: -8px;}
+                            &::after {bottom: -8px;}
+                        }
+
+                        &.open {
+                            .bars-icon {
+                                background-color: transparent;
+                                &::before {top: 0; transform: rotate(-45deg);}
+                                &::after {bottom: 0; transform: rotate(45deg);}
+                            }
+                        }
+                    }
+                }
+
+                @media (max-width: 991px) {
+                    .search_product_area {display: none;}
+                    .header-btns {
+                        .toggle {
+                            display: grid;
+                            place-items: center;
+                        }
+                        .desktop_btns {display: none;}
+                    }
+                }
+            }
+        }
+
+        .header_bottom_wrapper {
+            @include trans(.5s);
+            @media (min-width: 992px) {
+                height: 60px;
+                background-color: $secondary-color;
+                .container {height: 100%;}
+                .nav_menu {
+                    height: 100%;
+                    .nav_menu_items {
+                        height: 100%;
+                        display: flex;
+                        justify-content: flex-start;
+                        .menu_item {
+                            height: 100%;
+                            padding: 0 15px;
+                            @include trans(.3s);
+                            &.active, &:hover {
+                                background-color: #1d5ac9;
+                            }
+                            .menu_link {
+                                display: inline-flex;
+                                align-items: center;
+                                height: 100%;
+                                color: $white;
+                                font-size: 14px;
+                            }
+                        }
+                    }
+                }
+                .close_menu {display: none;}
+            }
+            .close_menu {
+                position: absolute;
+                top: .75rem; right: .75rem;
+                @include customBtn(30px, 30px);
+                background-color: unset;
+                svg {
+                    @include trans(0.3s);
+                    color: $primary-color;
+                }
+                &:hover {
+                    svg {
+                        color: $secondary-color;
+                        transform: rotate(180deg);
+                    }
+                }
+            }
+
+            // Responsive Nav Menu ==========
+            @media (max-width: 991px) {
+                position: fixed;
+                inset: 0;
+                height: 100%;
+                transform: translateX(-100%);
+                max-width: 350px;
+                width: 70%;
+                background-color: $white;
+                padding: calc($base-padding * 3) 0 calc($base-padding * 2);
+                z-index: 650;
+                .container {padding: 0;}
+                .nav_menu_items {
+                    .menu_item {
+                        padding: .75rem 1rem;
+                        border-top: 1px solid $light-color;
+                        .menu_link {
+                            color: $primary-color;
+                            font: {
+                                size: 13px;
+                                weight: 500;
+                            };
+                            &:any-link:hover {
+                                color: $secondary-color;
+                            }
+                            @include trans(.3s);
+                        }
+                    }
+                }
+
+                &.open_menu {
+                    transform: translateX(0);
+                }
+            }
+        }
+
+        &.header_fixed {
+            position: fixed;
+            animation: fixedHeader .5s ease-out;
+        }
+    }
+
+    .header_mobile {
+        position: fixed;
+        left: 0; bottom: 0;
+        width: 100%;
+        background-color: $white;
+        box-shadow: 0 -1px 4px 0 rgba(0, 0, 0, .4);
+        z-index: 200;
+        @media (min-width: 768px) {
+            display: none;
+        }
+        .action_btns {
+            display: flex;
+            align-items: center;
+            padding: 1rem 0;
+            .action_item {
+                flex: 1;
+                text-align: center;
+                .btn {
+                    @include centering;
+                    @include circle(30px);
+                    margin: 0 auto;
+                    background-color: $primary-color;
+                    border: none; outline: none;
+                    cursor: pointer;
+                    span {
+                        color: $white;
+                        font:  {
+                            size: 12px;
+                            weight: 500;
+                        };
+                    }
+                    &.cart {
+                        position: relative;
+                        .total_cart_items {
+                            @include totalCartItems("left");
+                        }
+                    }
+                    svg {
+                        color: $white;
+                        font-size: 12px;
+                        @include trans(.3s);
+                    }
+                }
+            }
+        }
+    }
+}
+//!===================================================
+.overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    inset: 0;
+    background: #000000b0;
+    z-index: 600;
+    visibility: hidden;
+    opacity: 0;
+    transition: .5s;
+    &.active {
+        visibility: visible;
+        opacity: 1;
+    }
+}
+//!========================================================
+@keyframes fixedHeader {
+    0% {transform: translateY(-80px);}
+    100% {transform: translateY(0);}
+}
+//!========================================================
+// Start Routing Pages(Nav Links)
+.pages_routing {
+    padding: 2rem 0;
+    .row {
+        .nav_links {
+            @include nav_links;
+        }
+    }
+}
