@@ -12,7 +12,7 @@ import { useSelector } from "react-redux";
 import { selectProductsPaths } from "../../RTk/slices/apiPath-slice";
 //? Import Swiper ===============
 import { Swiper, SwiperSlide } from 'swiper/react';
-import {Navigation} from "swiper";
+import {Navigation, Autoplay} from "swiper";
 import 'swiper/css';
 import 'swiper/css/navigation';
 //!================================================================
@@ -67,8 +67,12 @@ const NewArrivals = () => {
                     <Swiper
                         grabCursor={true}
                         className="cardSlider"
-                        modules={[Navigation]}
+                        modules={[Navigation, Autoplay]}
                         navigation
+                        autoplay={{
+                            delay: 3000,
+                            disableOnInteraction: false
+                        }}
                         breakpoints= {{
                             0: {
                                 slidesPerView: 1,

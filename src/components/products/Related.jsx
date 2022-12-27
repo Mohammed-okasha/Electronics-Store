@@ -12,7 +12,7 @@ import Loader from "../loader/Loader";
 import loadingImg from "../../assets/images/loading-1.gif";
 //? Import Swiper ===============
 import { Swiper, SwiperSlide } from 'swiper/react';
-import {Navigation} from "swiper";
+import {Autoplay, Navigation} from "swiper";
 import 'swiper/css';
 import 'swiper/css/navigation';
 //!=======================================================
@@ -73,8 +73,12 @@ const RelatedProducts = () => {
                     <Swiper
                         grabCursor={true}
                         className="cardSlider"
-                        modules={[Navigation]}
+                        modules={[Navigation, Autoplay]}
                         navigation
+                        autoplay={{
+                            delay: 3000,
+                            disableOnInteraction: false
+                        }}
                         breakpoints= {{
                             0: {
                                 slidesPerView: 1,

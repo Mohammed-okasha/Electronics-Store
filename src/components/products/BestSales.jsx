@@ -13,7 +13,7 @@ import { get, child } from "firebase/database";
 import { dbRef } from "../../firebase/config";
 //? Import Swiper ===============
 import { Swiper, SwiperSlide } from 'swiper/react';
-import {Navigation} from "swiper";
+import {Navigation, Autoplay} from "swiper";
 import 'swiper/css';
 import 'swiper/css/navigation';
 //!================================================================
@@ -75,8 +75,12 @@ const BestSales = () => {
                     <Swiper
                         grabCursor={true}
                         className="cardSlider"
-                        modules={[Navigation]}
+                        modules={[Navigation, Autoplay]}
                         navigation
+                        autoplay={{
+                            delay: 3000,
+                            disableOnInteraction: false
+                        }}
                         breakpoints= {{
                             0: {
                                 slidesPerView: 1,

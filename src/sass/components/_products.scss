@@ -11,18 +11,22 @@
 // Slider Control Btns
 .swiper {
     & :is(.swiper-button-prev, .swiper-button-next) {
-        visibility: hidden;
-        opacity: 0;
         color: $primary-color;
         @include trans(.3s);
         &::after {
             font: {size: 1.8rem; weight: 500;}
         }
     }
-    &:hover :is(.swiper-button-prev, .swiper-button-next) {
-        visibility: visible;
-        opacity: 1;
-        &.swiper-button-disabled {opacity: .4;}
+    @media (min-width: 992px) {
+        & :is(.swiper-button-prev, .swiper-button-next) {
+            visibility: hidden;
+            opacity: 0;
+        }
+        &:hover :is(.swiper-button-prev, .swiper-button-next) {
+            visibility: visible;
+            opacity: 1;
+            &.swiper-button-disabled {opacity: .4;}
+        }
     }
 }
 

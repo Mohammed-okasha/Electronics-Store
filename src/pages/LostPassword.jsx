@@ -98,11 +98,11 @@ const LostPassword = () => {
         }
     };
 
-// Valid Email ================
-const validEmail = (email) => {
-    const reg = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-    return reg.test(String(email).toLowerCase().trim());
-};
+    // Valid Email ================
+    const validEmail = (email) => {
+        const reg = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+        return reg.test(String(email).toLowerCase().trim());
+    };
 //!==================================================================
     return (
         <section id="account_lost_password">
@@ -126,7 +126,7 @@ const validEmail = (email) => {
                         </ul>
 
                         <div className="title">
-                            <h2 className="title">
+                            <h2 className="custom-title">
                                 <span>Lost password</span>
                             </h2>
                             <p className="text-muted">

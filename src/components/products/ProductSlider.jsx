@@ -66,14 +66,16 @@ const ProductSlider = ({product, path}) => {
 
     return (
         <div className="product-card">
-            <div className="image">
+            <Link to={`/product/${path}/${id}`} className="image">
                 <img src={image}
                     alt={title} className="card-img"
                 />
-            </div>
+            </Link>
 
             <div className="card-content">
-                <h4 className="title">{title}</h4>
+                <Link to={`/product/${path}/${id}`}>
+                    <h4 className="title">{title}</h4>
+                </Link>
                 <p className="text-muted">{desc}</p>
 
                 <div className="card-footer">
